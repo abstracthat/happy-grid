@@ -1,0 +1,34 @@
+{
+  "name": "happy-grid",
+  "version": "1.0.0",
+  "description": "Stylus fractional grid system built with calc().",
+  "main": "happy-grid.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abstracthat/happy-grid.git"
+  },
+  "keywords": [
+    "grid",
+    "stylus",
+    "fraction",
+    "ratio"
+  ],
+  "author": {
+    "name": "Josh Bertrand"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abstracthat/happy-grid/issues"
+  },
+  "homepage": "https://github.com/abstracthat/happy-grid",
+  "_npmUser": {
+    "name": "abstracthat",
+    "email": "josh.bertrand@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "abstracthat",
+      "email": "josh.bertrand@gmail.com"
+    }
+  ]
+}
