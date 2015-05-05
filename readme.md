@@ -81,13 +81,13 @@ Aliased as `row()` as well.
 
 ```stylus
 section
-  center(30em, gutter)
+  center 30em
 ```
 
 ### Column
 Here's the star of the show. Creates a column that is a fraction of the size of it's containing element with a gutter. You don't need to pass any additional ratios (fractions) as the grid system will make use of CSS `calc()`. Note that the ratio must always be a **fraction wrapped in quotes**... i.e. `column('1/2')`, NOT `column(1/2)` and NOT `column(.5)`.
 
-**Gutter**: The margin on the right side of the element used to create a gutter. Typically this is left alone and the global gutter setting will be used, but you can override it here if you want certain elements to have a particularly large or small gutter (pass 0 for no gutter at all).
+**Margin**: The margin on the right side of the element used to create a gutter. Typically this is left alone and the global gutter setting will be used, but you can override it here if you want certain elements to have a particularly large or small gutter (pass 0 for no gutter at all).
 
 **Cycle**: The grid works by assigning a margin-right to all elements except the last in the row. It does this by default by using the denominator of the fraction you pick. To override this default pass a `cycle` parameter. e.g. `column('2/4', cycle: 2)`.
 
@@ -101,10 +101,10 @@ Aliased as `col()` also.
   column '1/3' 2%
 
 .cycle-override
-  column('2/6', cylce: 3)
+  column('2/6', cycle: 3)
 
 .gutter-and-cycle-override
-  column '2/6' 2em 3
+  column('2/6', margin: 2em, cycle: 3)
 ```
 
 ### Offset

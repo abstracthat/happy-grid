@@ -69,24 +69,24 @@ row = center
  *
  * @param {string} [fraction='1/1'] - This is a simple fraction of the containing element's width. This must be a string written as a fraction.
  * @param {number} [cycle=convert(unquote(split('/', fraction)[1]))] - The grid works by assigning a margin-right to all elements except the last in the row. It does this by default by using the denominator of the fraction you pick. To override this default use this param. e.g. column('2/4', cycle: 2)
- * @param {number} [_gutter=gutter] - The margin on the right side of the element used to create a gutter. Typically this is left alone and the global gutter will be used, but you can override it here if you want certain elements to have a particularly large or small gutter (pass 0 for no gutter at all).
+ * @param {number} [margin=gutter] - The margin on the right side of the element used to create a gutter. Typically this is left alone and the global gutter will be used, but you can override it here if you want certain elements to have a particularly large or small gutter (pass 0 for no gutter at all).
  *
  * @example
  *   .column
  *     column('1/3')
  */
 
-column(fraction = '1/1', cycle = convert(unquote(split('/', fraction)[1])), _gutter = gutter)
+column(fraction = '1/1', margin = gutter, cycle = convert(unquote(split('/', fraction)[1])))
   _get-size()
-    if _gutter is 0
+    if margin is 0
       return s('calc(99.999999% * %s)', unquote(fraction))
     else
-      return s('calc(99.99% * %s - (%s - %s * %s))', unquote(fraction), _gutter, _gutter, unquote(fraction))
+      return s('calc(99.99% * %s - (%s - %s * %s))', unquote(fraction), margin, margin, unquote(fraction))
   
   width _get-size()
   
   &:nth-child(n)
-    margin-right _gutter
+    margin-right margin
     float left
     clear none
 
@@ -109,7 +109,7 @@ col = column
  * Margin to the left or right of an element depending on if the fraction passed is positive or negative.
  *
  * @param {string} [fraction='1/1'] - Fraction of the container to be offset. Must be a string.
- * @param {number} [_gutter=gutter] - How large the gutter involved is, typically this won't be adjusted, but if you have set the elements for that container to have different gutters than default, you will need to match that gutter here as well.
+ * @param {number} [margin=gutter] - How large the gutter involved is, typically this won't be adjusted, but if you have set the elements for that container to have different gutters than default, you will need to match that gutter here as well.
  *
  * @example
  *   .two-elements
@@ -118,21 +118,21 @@ col = column
  *       offset('1/3')
  */
 
-offset(fraction = '1/1', _gutter = gutter)
+offset(fraction = '1/1', margin = gutter)
   numerator = convert(unquote(split('/', fraction)[0]))
 
   _get-size()
     if numerator > 0
-      if _gutter is 0
+      if margin is 0
         return s('calc(99.999999% * %s)', unquote(fraction))
       else
-        return s('calc(99.99% * %s - (%s - %s * %s) + (%s * 2))', unquote(fraction), _gutter, _gutter, unquote(fraction), _gutter)
+        return s('calc(99.99% * %s - (%s - %s * %s) + (%s * 2))', unquote(fraction), margin, margin, unquote(fraction), margin)
 
     if numerator < 0
-      if _gutter is 0
+      if margin is 0
         return s('calc(99.999999% * (%s * -1))', unquote(fraction))
       else
-        return s('calc(99.99% * (%s * -1) - (%s - %s * (%s * -1)) + %s)', unquote(fraction), _gutter, _gutter, unquote(fraction), _gutter)
+        return s('calc(99.99% * (%s * -1) - (%s - %s * (%s * -1)) + %s)', unquote(fraction), margin, margin, unquote(fraction), margin)
 
   if numerator > 0
     margin-right _get-size() !important
@@ -140,7 +140,7 @@ offset(fraction = '1/1', _gutter = gutter)
     margin-left _get-size() !important
   else
     margin-left 0 !important
-    margin-right _gutter !important
+    margin-right margin !important
 
 
 /**
@@ -148,7 +148,7 @@ offset(fraction = '1/1', _gutter = gutter)
  * Source ordering. Shift elements left or right by passing a positive or negative fraction.
  *
  * @param {string} [fraction='1/1'] - Fraction of the container to be shifted. Must be a string.
- * @param {number} [_gutter=gutter] - Adjust the size of the gutter for this movement. Should match the element's gutter.
+ * @param {number} [margin=gutter] - Adjust the size of the gutter for this movement. Should match the element's gutter.
  *
  * @example
  *   .reversed-order
@@ -159,12 +159,12 @@ offset(fraction = '1/1', _gutter = gutter)
  *       move('-1/2')
  */
 
-move(fraction = '1/1', _gutter = gutter)
+move(fraction = '1/1', margin = gutter)
   _get-size()
-    if _gutter is 0
+    if margin is 0
       return s('calc(99.999999% * %s)', unquote(fraction))
     else
-      return s('calc(99.99% * %s - (%s - %s * %s) + %s)', unquote(fraction), _gutter, _gutter, unquote(fraction), _gutter)
+      return s('calc(99.99% * %s - (%s - %s * %s) + %s)', unquote(fraction), margin, margin, unquote(fraction), margin)
   
   position relative
   left _get-size()
